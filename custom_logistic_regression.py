@@ -18,3 +18,6 @@ def gradient_descent(x,y,w,b,n, iter):
           w -= n * dj_dw
           b -= n * dj_db
      return w, b
+
+def predict(x_test, w, b):
+     return sigmoid(np.dot(x_test, w)+b)

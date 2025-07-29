@@ -1,10 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from sklearn.datasets import load_wine, load_breast_cancer
-from custom_logistic_regression import sigmoid, gradient_descent, gradient_logistic
-
-def predict(x_test, w, b):
-     return sigmoid(np.dot(x_test, w)+b)
+from sklearn.datasets import load_breast_cancer
+from custom_logistic_regression import sigmoid, gradient_descent, gradient_logistic, predict
 
 cancer = load_breast_cancer()
 
@@ -33,3 +30,18 @@ y_pred_sklearn = model.predict(x_test)
 from sklearn.metrics import classification_report
 print(classification_report(y_test, y_pred_custom))
 print(classification_report(y_test, y_pred_sklearn))
+
+import pandas as pd
+cancer_df = pd.DataFrame(cancer.data, columns = cancer.feature_names)#type: ignore
+cancer_df['target'] = cancer.target#type: ignore
+
+# Correlation
+corr = cancer_df.corr()['target']
+corr = corr[0:-1]
+plt.barh(cancer_df.drop(columns=['target']).columns, width=corr)
+plt.show()
+
+# Heatmap of Correlation
+from seaborn import heatmap
+corr = cancer_df.corr()
+heatmap(cancer_df.corr(), cmap = 'viridis')

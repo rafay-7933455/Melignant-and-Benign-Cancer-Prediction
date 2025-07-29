@@ -42,13 +42,13 @@ plt.plot(x_test[:, -3][sorted_indices], y_pred_custom[sorted_indices], color = '
 plt.plot(x_test[:, -3][sorted_indices], y_pred_sklearn[sorted_indices], color = 'red', linestyle=':')
 plt.show()
 
-# # Correlation
-# corr = cancer_df.corr()['target']
-# corr = corr[0:-1]
-# plt.barh(cancer_df.drop(columns=['target']).columns, width=corr)
-# plt.show()
+# Correlation
+corr = cancer_df.corr()['target']
+corr = corr[0:-1]
+plt.barh(cancer_df.drop(columns=['target']).columns, width=corr)
+plt.show()
 
-# # Heatmap of Correlation
-# from seaborn import heatmap
-# corr = cancer_df.corr()
-# heatmap(cancer_df.corr(), cmap = 'viridis')
+# Heatmap of Correlation
+from seaborn import heatmap
+corr = cancer_df.corr()
+heatmap(cancer_df.corr(), cmap = 'viridis')
